@@ -4,3 +4,5 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
+primitive-types = "0.13.1"
+ruint = { version = "1.15.0", features = ["primitive-types"] }
