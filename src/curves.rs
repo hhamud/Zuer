@@ -1,5 +1,4 @@
-use crate::Fe;
-use crate::PrimeField;
+use crate::{Fe, PrimeField};
 use ruint::aliases::U256;
 use ruint::uint;
 
@@ -20,7 +19,7 @@ impl PrimeField for SmallPrime {
     const NAME: &'static str = "F101";
 }
 
-impl From<U256> for super::Fe<BN254> {
+impl From<U256> for Fe<BN254> {
     fn from(v: U256) -> Self {
         super::Fe::<BN254>::new(v)
     }
@@ -39,7 +38,7 @@ mod tests {
     use ruint::uint;
 
     #[test]
-    fn conversions() {
+    fn test_conversions() {
         let a: Fe<BN254> = 5u64.into();
         let b: Fe<BN254> = uint!(42_U256).into();
         assert_eq!(a.value(), U256::from(5));
@@ -48,4 +47,22 @@ mod tests {
         let x: Fe<SmallPrime> = 17u64.into();
         assert_eq!(x.value(), 17);
     }
+
+    #[test]
+    fn test_addition() {
+        let x: Fe<SmallPrime> = 94u64.into();
+        let y: Fe<SmallPrime> = 8.into();
+        let z = x + y;
+
+        assert_eq!(z.value(), 1);
+    }
+
+    #[test]
+    fn test_addition_overflow() {}
+
+    #[test]
+    fn test_subtraction() {}
+
+    #[test]
+    fn test_subtraction_underflow() {}
 }
