@@ -12,8 +12,6 @@ This library provides implementations of prime fields and elliptic curve operati
 
 To use this library, add the following to your `Cargo.toml` file:
 
-[https://github.com/hhamud/zuer](https://github.com/hhamud/zuer)
-
 ```toml
 [dependencies]
 zuer = { git = "https://github.com/hhamud/zuer" }

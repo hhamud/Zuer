@@ -1,3 +1,5 @@
+#![feature(generic_const_exprs)]
+
 use num_traits::{One, Pow, WrappingMul, Zero};
 use std::{
     fmt::{Debug, Display},
@@ -7,6 +9,7 @@ use std::{
 
 pub mod curves;
 pub mod point;
+pub mod polynomial;
 
 fn modpow<P: PrimeField>(mut base: P::Number, mut exp: P::Number) -> P::Number {
     let one = P::Number::one();
@@ -22,7 +25,7 @@ fn modpow<P: PrimeField>(mut base: P::Number, mut exp: P::Number) -> P::Number {
     acc
 }
 
-pub trait PrimeField {
+pub trait PrimeField: Eq + Clone + Copy {
     type Number: Copy
         + Eq
         + PartialOrd
@@ -41,6 +44,8 @@ pub trait PrimeField {
         + One;
 
     const PRIME: Self::Number;
+    const A: Self::Number;
+    const B: Self::Number;
     const NAME: &'static str;
 }
 
